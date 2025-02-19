@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ntv_vor_25/methods.dart';
+
 void main(List<String> arguments) {
   /*
     0. Create a personal message. Use a variable to represent a person's name, and print a
@@ -34,7 +35,8 @@ void main(List<String> arguments) {
   /*
     3.  Remove all the spaces from the rhyme. And print the modified rhyme.
    */
-  String NureseryRyhme = "Eena, meena, mina, mo, Catch a mouse by the toe; If he squeals let him go, Eeena, meena, mina, mo.";
+  String NureseryRyhme =
+      "Eena, meena, mina, mo, Catch a mouse by the toe; If he squeals let him go, Eeena, meena, mina, mo.";
   print(NureseryRyhme.replaceAll(' ', ''));
   /*
    4. Prompt a user for their full name (first name and last name)
@@ -50,10 +52,18 @@ void main(List<String> arguments) {
   print('Hello $firstName, but what is your last name?');
   String lastName = stdin.readLineSync().toString();
   print('Hello, $firstName $lastName');
-  List<String> names = firstName.split(' ');
-  String firstNameCap = firstName[0].toUpperCase();
+
+  String fullName = '$firstName $lastName';
+  print(fullName.toUpperCase());
+
+  firstName = 'jon gunnar';
   print(firstName);
 
+  String capName = fullName
+      .split(' ')
+      .map((name) => name[0].toUpperCase() + name.substring(1).toLowerCase())
+      .join(' ');
+  print(capName);
 
   /*
     5. Display the following SSN on the correct Format:
@@ -62,6 +72,10 @@ void main(List<String> arguments) {
   String SSN1 = "200689-2409";
   String SSN2 = "200689 2409";
   String SSN3 = "2 006 8924 09";
+  print(SSN1.replaceAll('-', ''));
+  print(SSN2.replaceAll(' ', ''));
+  print(SSN3.replaceAll(' ', ''));
+
   /*
   Bónus task calculate the age from the SSN.
    */
