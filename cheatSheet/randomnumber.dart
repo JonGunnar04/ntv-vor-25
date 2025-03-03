@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+
 void main(){
   print('Select which difficulty you would like, 1 = easy, 2 = medium, 3 = hard.');
   bool sameNumber = false;

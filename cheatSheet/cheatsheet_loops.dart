@@ -23,24 +23,25 @@ void main(){
     print(animals);
   }
 
-  int numb = 5;
-  // while
 
   /*
+
+  int numb = 5;
+  // while
   while(numb > 0){
     print(numb);
     numb--;
   }
 
-  */
+
 
   // do while
-  /*
   do{
     print(numb);
     numb--;
   }
   while(numb > 0);
+
   */
 
 

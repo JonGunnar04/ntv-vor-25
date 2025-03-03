@@ -44,7 +44,6 @@ void main(){
   names.removeAt(indexofnice);
   print(names);
 
-   */
 
   List numbs = [5,4,3,2,1,9,8,7,6];
   List chars = ['a','b','d','g','f','e'];
@@ -60,4 +59,7 @@ void main(){
 
   // remove last item
   numbs.removeLast();
+  print(numbs);
+
+   */
 }
