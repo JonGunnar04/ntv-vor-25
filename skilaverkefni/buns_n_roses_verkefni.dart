@@ -30,7 +30,7 @@ void main() {
       print('\nPlease enter which item you would like, (enter "exit" to finish and "remove" to  remove an item)',);
       String input = stdin.readLineSync().toString();
       // Exit condition
-      if (input == 'exit') {
+      if (input.toLowerCase() == 'exit') {
         if (order.isEmpty) {
           print('You had nothing on your order.');
         } else {
@@ -41,7 +41,7 @@ void main() {
           print('Your total is: \$$totalPrice');
         }
         break;
-      } else if (input == 'remove') {
+      } else if (input.toLowerCase() == 'remove') {
         // Remove condition
         if (order.isEmpty) {
           print('Your order is empty');
