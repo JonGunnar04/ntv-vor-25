@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'dart:math';
 
 void main() {
-  print('Welcome to Jóns Burger Joint!');
-  print('\nHere is our menu:');
+  // Greeting and menu display
+  print("\nWelcome to Johnny's Burger Joint!");
+  print('Here is our menu:');
 
+  // Declaring every list and variable in this program
   List burgers = [
     'Plain Burger - \$5.00',
     'Cheese Burger - \$4.50',
@@ -12,37 +13,36 @@ void main() {
     'Chicken Burger - \$6.50',
   ];
   List prices = [5.00, 4.50, 7.00, 6.50];
-  List test = [];
-
   List order = [];
   double totalPrice = 0.0;
 
+  // Printing the menu
   for (int i = 0; i < burgers.length; i++) {
     print('${i + 1} ${burgers[i]}');
   }
 
+  // Main ordering loop
   while (true) {
-    print('\nPlease enter which item you would like, (enter "exit" to finish and "remove" to  remove an item)',);
-
     try {
-      for (int i = 0; i < order.length; i++) {
-        print('${i + 1} ${order[i]}');
-      }
       if (order.isNotEmpty) {
         print('Total: \$$totalPrice');
       }
+      print('\nPlease enter which item you would like, (enter "exit" to finish and "remove" to  remove an item)',);
       String input = stdin.readLineSync().toString();
+      // Exit condition
       if (input == 'exit') {
         if (order.isEmpty) {
           print('You had nothing on your order.');
         } else {
-          print('Your summary:');
+          print('\nYour summary:');
           for (int i = 0; i < order.length; i++) {
             print('${i + 1} ${order[i]}');
-          } print('Your total is: \$$totalPrice');
+          }
+          print('Your total is: \$$totalPrice');
         }
         break;
       } else if (input == 'remove') {
+        // Remove condition
         if (order.isEmpty) {
           print('Your order is empty');
         } else {
@@ -51,24 +51,30 @@ void main() {
           if (removenumber >= 0 && removenumber < order.length) {
             print('Removed ${order[removenumber]} from your order.');
             order.removeAt(removenumber);
-            test.removeAt(removenumber);
             totalPrice -= prices[removenumber];
+            for (int i = 0; i < order.length; i++) {
+              print('${i + 1} ${order[i]}');
+            }
           }
         }
       } else {
+        // Adding an item to an order
         int index = int.parse(input) - 1;
         if (index >= 0 && index < burgers.length) {
           order.add(burgers[index]);
-          test.add(prices[index]);
           totalPrice += prices[index];
           print('Added ${burgers[index]} to your order');
-          print('Your order:');
+          print('\nYour order:');
+          for (int i = 0; i < order.length; i++) {
+            print('${i + 1} ${order[i]}');
+          }
         } else {
           print('invalid selection');
         }
       }
-    } catch (e) {
-      print(e);
+    } // Catching an error in the While Loop
+    catch (e) {
+      print('Invalid Input');
     }
   }
 }
