@@ -2,79 +2,90 @@ import 'dart:math';
 
 import 'package:ntv_vor_25/methods.dart';
 
-void main(){
+void main() {
   company Bonus = company(id: 1,
-      name: 'Bónus',
-      domainURL: 'bonus.is',
-      type: 'Supermarket');
+      name: "Bónus",
+      domainURL: "bonus.is",
+      type: "Supermarket");
   company Kronan = company(id: 2,
-      name: 'Krónan',
-      domainURL: 'kronan.is',
-      type: 'Supermarket');
+      name: "Krónan",
+      domainURL: "kronan.is",
+      type: "Supermarket");
   company Steypustodin = company(id: 3,
-      name: 'Steypustöðin',
-      domainURL: 'steypustodin.is',
-      type: 'Supermarket');
-
+      name: "Steypustöðin",
+      domainURL: "steypustodin.is",
+      type: "Building");
   List<company> myCompanyList = [];
   myCompanyList.add(Bonus);
   myCompanyList.add(Kronan);
   myCompanyList.add(Steypustodin);
+  //Sækjum listan af names frá þessum file þarna lib/methods.dart
   List<String> employees = getNamesList();
+  //Búum til tóman "employee" lista
   List<employee> employeesTransformed = [];
-  for (String employeeName in employees){
-    String username =  createUserName(employeeName);
+  //Lúppum í gegnum listan.
+  for (String employeeName in employees) {
+    //Búum til username með createUserName functioninni fyrir neðan
+    String username = createUserName(employeeName);
     var random = Random();
     int randomCompany = random.nextInt(3);
     int randomAge = random.nextInt(45);
     int age = randomAge + 20;
     company tempCompany = myCompanyList[randomCompany];
+    //Búum til nýtt "employee" object. p.s. Object er basically okkar
+    // tegund af String eða int eða bool. bara aðeins flóknari og geta geymt meira
     employee newEmployee = employee(
         name: employeeName,
         age: age,
         username: username,
-        employer: tempCompany
+        employeer: tempCompany
     );
+    tempCompany.employees.add(newEmployee);
+    //Bætum þessum newEmployee i lista listan okkar sem við bjuggum til.
     employeesTransformed.add(newEmployee);
-    for (employee e in employeesTransformed) {
-      if(e.employer.id == 1){
-        print(e.name);
-        print(e.age);
-        print(e.username);
-        print(e.employer.name);
-        print(e.employer.type);
-        print('______________');
-      }
+  }
+  for (employee e in employeesTransformed) {
+    if (e.employeer.id == 1) {
+      print(e.name);
+      print(e.age);
+      print(e.username);
+      print(e.employeer.name);
+      print(e.employeer.type);
+      print("________________________");
     }
   }
 }
-class employee {
-  String name ;
-  int age ;
-  String username;
-  company employer;
 
-  employee({required this.name,required this.age,required this.username, required this.employer});
+//Hérna er employee classinn okkar
+class employee {
+  String name;
+  int age;
+  String username;
+  company employeer;
+  employee({required this.name,required this.age,
+    required this.username, required this.employeer});
 }
-class company{
+//Hérna er company classinn okkar
+class company {
   int id;
   String name;
   String domainURL;
   String type;
   List<employee> employees = [];
   company({required this.id, required this.name,
-    required this.domainURL, required this.type,});
+    required this.domainURL, required this.type });
 }
-
-String createUserName(String tempName){
-  List splitName = tempName.split(' ');
+//Hérna er createUserName functionið okkar.
+String createUserName(String tempName) {
+  List splitName = tempName.split(" ");
   String firstName = splitName[0];
   String lastName = splitName[1];
   String username = firstName + lastName.substring(0,3);
+  username = removeIcelandicLetters(username);
   username = username.toLowerCase();
-  username = removeIcelandicLetters('');
   return username;
 }
+//Remove icelandic letters.
 String removeIcelandicLetters(String input) {
   Map<String, String> icelandicToLatin = {
     'ð': 'd',
@@ -98,6 +109,7 @@ String removeIcelandicLetters(String input) {
     'Ý': 'Y',
     'Ö': 'O'
   };
+
   icelandicToLatin.forEach((key, value) {
     input = input.replaceAll(key, value);
   });
