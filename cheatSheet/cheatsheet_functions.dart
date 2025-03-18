@@ -48,7 +48,7 @@ void main(){
   }
   named(age: 20, name: 'Jón Gunnar');
 
-  // How long till in 50
+  // How long till i am 50
 
   print('Enter your age');
   int age = int.parse(stdin.readLineSync()!);
